@@ -1,0 +1,40 @@
+"""CircuitPython How to use example"""
+import time
+import board
+from digitalio import DigitalInOut, Direction, Pull
+import touchio
+import adafruit_dotstar
+import neopixel
+
+import random
+
+#touch set up
+touch_pad = board.A0
+touch = touchio.TouchIn(touch_pad)
+
+print(dir(board))
+
+
+#LED on board setup.
+led = DigitalInOut(board.D13)
+led.direction = Direction.OUTPUT
+
+pix_pin=board.D0
+num_pix=2
+
+# setup
+neopixel = neopixel.NeoPixel(pix_pin, num_pix, brightness=0.1)
+
+
+while True:
+    # if switch is on -> turn on board led 
+        
+    
+    ## if the touch is on turn off led on for 3 seconds 
+    if touch.value:
+        # neopixel[0] = (random.randint(0,255), random.randint(0,255), random.randint(0,255))
+        neopixel[1] = (random.randint(0,255), random.randint(0,255), random.randint(0,255))
+        neopixel[0] = (0, 0, 0)
+
+    
+    time.sleep(0.01)
